@@ -14,6 +14,7 @@ Testing locally
 Before running `act` using your local docker installation, you must add the following to `~/.actrc`:
 
     --container-daemon-socket -
+    --artifact-server-path artifacts
 
 You can test your new workflow project locally before deploying it on GitHub using `act`. See https://github.com/nektos/act for details.  After installing `act` you can run the command
 
