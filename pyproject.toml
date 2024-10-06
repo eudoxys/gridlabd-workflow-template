@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "MY_PROJECT" # TODO: set this to your project name
+version = "MY_PROJECT_VERSION" # TODO: updat this for every release of your project
+description = "MY_PROJECT_DESCRIPTION" # TODO: set this when you create your project
+authors = [
+    {name = "MY_NAME <MY_EMAIL@MY.ORG>"}, # TODO: change this to your name and email
+    ]
+maintainers = [
+    {name = "MY_NAME <MY_EMAIL@MY.ORG>"}, # TODO: change this to your name and email
+    ]
+readme = "README.md"
+requires-python = ">= 3.10"
+dependencies = [
+    ]
+keywords = ["MY","KEWORDS"] # TODO: change this to your project's keywords
+license = {text="MIT License"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    ]
+
+[project.urls]
+Homepage = "https://github.com/MY_ORG/MY_PROJECT" # TODO: update this for your project
+Documentation = "https://MY_PROJECT.gitub.io/" # TODO: update this for your project
+Repository = "https://github.com/MY_ORG/MY_PROJECT.git" # TODO: update this for your project
+Issues = "https://github.com/MY_ORG/MY_PROJECT/issues" # TODO: update this for your project
+
+[project.scripts]
+MY_PROJECT = "MY_PROJECT:main" # TODO: update this for your project

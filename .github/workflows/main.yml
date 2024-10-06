@@ -1,0 +1,47 @@
+name: workflow
+
+on:
+
+  push:
+    branches: [ main ]
+
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  run-pipeline:
+
+    runs-on: gridlabd
+
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Checkout project
+      run: |
+        test -d data || ( echo "Missing data folder" ; false )
+        test -f data/prepare.py || ( echo "ERROR: missing data/prepare.py" ; false )
+        test -f data/main.glm || ( echo "missing data/main.glm" ; false )
+        test -f data/analyse.py || ( echo "missing" data/analyse.py ; false )
+
+    - name: Run data preparation
+      run: |
+        cd data
+        python3 prepare.py 
+
+    - name: Run gridlabd simulation
+      run: |
+        cd data
+        gridlabd -D keep_progress=TRUE -T 0 main.glm
+    
+    - name: Run output analysis
+      run: |
+        cd data
+        python3 analyse.py
+
+    - name: Assemble artifacts for upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: results
+        path: data
