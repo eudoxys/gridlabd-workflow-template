@@ -12,7 +12,8 @@ jobs:
 
   run-pipeline:
 
-    runs-on: gridlabd
+    runs-on: ubuntu-latest
+    container: lfenergy/arras:latest
 
     steps:
 
