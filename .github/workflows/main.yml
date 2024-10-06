@@ -1,5 +1,11 @@
 name: workflow
 
+env:
+  WORKDIR: data
+  PREPARE: python3 prepare.py
+  SIMULATE: gridlabd -D keep_process=TRUE -T 0 main.glm
+  ANALYSE: python3 analyse.py
+
 on:
 
   push:
@@ -19,30 +25,46 @@ jobs:
 
     - uses: actions/checkout@v3
 
+    - name: Check node
+      run: |
+        if command -v node </dev/null >/dev/null 2>&1
+        then
+          echo 'node is ok'
+        else
+          echo 'install node' 
+          curl -sS https://webi.sh/node | sh 1>/dev/null 
+          echo ~/.local/opt/node/bin >> $GITHUB_PATH    
+        fi
+
     - name: Checkout project
       run: |
-        test -d data || ( echo "Missing data folder" ; false )
-        test -f data/prepare.py || ( echo "ERROR: missing data/prepare.py" ; false )
-        test -f data/main.glm || ( echo "missing data/main.glm" ; false )
-        test -f data/analyse.py || ( echo "missing" data/analyse.py ; false )
+        test -d $WORKDIR || ( echo "Missing $WORKDIR folder" ; false )
+        test -f $WORKDIR/prepare.py || ( echo "ERROR: missing $WORKDIR/prepare.py" ; false )
+        test -f $WORKDIR/main.glm || ( echo "missing $WORKDIR/main.glm" ; false )
+        test -f $WORKDIR/analyse.py || ( echo "missing" $WORKDIR/analyse.py ; false )
+        echo "Workflow settings:"
+        echo "  WORKDIR=$WORKDIR"
+        echo "  PREPARE=$PREPARE"
+        echo "  SIMULATE=$SIMULATE"
+        echo "  ANALYSE=$ANALYSE"
 
-    - name: Run data preparation
+    - name: Prepare data
       run: |
-        cd data
-        python3 prepare.py 
+        cd $WORKDIR
+        $PREPARE 
 
-    - name: Run gridlabd simulation
+    - name: Simulate system
       run: |
-        cd data
-        gridlabd -D keep_progress=TRUE -T 0 main.glm
+        cd $WORKDIR
+        $SIMULATE
     
-    - name: Run output analysis
+    - name: Analyse results
       run: |
-        cd data
-        python3 analyse.py
+        cd $WORKDIR
+        $ANALYSE
 
-    - name: Assemble artifacts for upload
+    - name: Upload results
       uses: actions/upload-artifact@v3
       with:
         name: results
-        path: data
+        path: $WORKDIR
