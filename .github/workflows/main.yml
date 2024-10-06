@@ -1,7 +1,7 @@
 name: workflow
 
 env:
-  WORKDIR: data
+  WORKDIR: data # NOTE: uploads path needs to match this folder
   PREPARE: python3 prepare.py
   SIMULATE: gridlabd -D keep_process=TRUE -T 0 main.glm
   ANALYSE: python3 analyse.py
@@ -67,4 +67,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: results
-        path: $WORKDIR
+        path: data
