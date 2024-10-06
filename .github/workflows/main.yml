@@ -1,10 +1,11 @@
 name: workflow
 
 env:
-  WORKDIR: data # NOTE: uploads path needs to match this folder
-  PREPARE: python3 prepare.py
+  WORKDIR: data/ 
+  PREPARE: gridlabd python prepare.py
   SIMULATE: gridlabd -D keep_process=TRUE -T 0 main.glm
-  ANALYSE: python3 analyse.py
+  ANALYSE: gridlabd python analyse.py
+  RETAIN_DAYS: 90
 
 on:
 
@@ -31,7 +32,7 @@ jobs:
         then
           echo 'node is ok'
         else
-          echo 'install node' 
+          echo 'Installing node...' 
           curl -sS https://webi.sh/node | sh 1>/dev/null 
           echo ~/.local/opt/node/bin >> $GITHUB_PATH    
         fi
@@ -50,8 +51,8 @@ jobs:
 
     - name: Prepare data
       run: |
-        cd $WORKDIR
-        $PREPARE 
+        cd $WORKDIR 
+        $PREPARE
 
     - name: Simulate system
       run: |
@@ -64,7 +65,11 @@ jobs:
         $ANALYSE
 
     - name: Upload results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: results
-        path: data
+        path: ${{ env.WORKDIR }}/*
+        retain-days: ${{ env.RETAIN_DAYS }}
+
+    - name: Output artifact ID
+      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'

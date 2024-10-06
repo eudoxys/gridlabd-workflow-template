@@ -11,6 +11,10 @@ Workflow projects are GridLAB-D simulations that require multiple steps to compl
 Testing locally
 ---------------
 
+Before running `act` using your local docker installation, you must add the following to `~/.actrc`:
+
+    --container-daemon-socket -
+
 You can test your new workflow project locally before deploying it on GitHub using `act`. See https://github.com/nektos/act for details.  After installing `act` you can run the command
 
     docker pull lfenergy/arras:latest
