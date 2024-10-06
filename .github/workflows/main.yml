@@ -69,7 +69,4 @@ jobs:
       with:
         name: results
         path: ${{ env.WORKDIR }}/*
-        retain-days: ${{ env.RETAIN_DAYS }}
-
-    - name: Output artifact ID
-      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+        retention-days: ${{ env.RETAIN_DAYS }}
