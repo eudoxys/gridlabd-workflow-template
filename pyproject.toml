@@ -7,10 +7,10 @@ name = "MY_PROJECT" # TODO: set this to your project name
 version = "0.0.0" # TODO: update this for every release of your project
 description = "MY_PROJECT_DESCRIPTION" # TODO: set this when you create your project
 authors = [
-    {name = "MY_NAME <MY_EMAIL@MY.ORG>"}, # TODO: change this to your name and email
+    {name = "David P. Chassin <dchassin@eudoxys.com>"}, # TODO: change this to your name and email
     ]
 maintainers = [
-    {name = "MY_NAME <MY_EMAIL@MY.ORG>"}, # TODO: change this to your name and email
+    {name = "David P. Chassin <dchassin@eudoxys.com>"}, # TODO: change this to your name and email
     ]
 readme = "README.md"
 requires-python = ">= 3.10"
