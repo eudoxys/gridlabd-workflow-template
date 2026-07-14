@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MY_PROJECT" # TODO: set this to your project name
-version = "MY_PROJECT_VERSION" # TODO: updat this for every release of your project
+version = "0.0.0" # TODO: update this for every release of your project
 description = "MY_PROJECT_DESCRIPTION" # TODO: set this when you create your project
 authors = [
     {name = "MY_NAME <MY_EMAIL@MY.ORG>"}, # TODO: change this to your name and email
@@ -16,7 +16,7 @@ readme = "README.md"
 requires-python = ">= 3.10"
 dependencies = [
     ]
-keywords = ["MY","KEWORDS"] # TODO: change this to your project's keywords
+keywords = ["eudoxys","KEYWORDS"] # TODO: change this to your project's keywords
 license = {text="MIT License"}
 classifiers = [
     "Development Status :: 3 - Alpha",
