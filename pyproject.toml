@@ -31,3 +31,6 @@ Issues = "https://github.com/MY_ORG/MY_PROJECT/issues" # TODO: update this for y
 
 [project.scripts]
 MY_PROJECT = "MY_PROJECT:main" # TODO: update this for your project
+
+[epm]
+hidden = true
